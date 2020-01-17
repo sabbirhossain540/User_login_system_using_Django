@@ -3,7 +3,8 @@ from basic_app.forms import UserForm,UserProfileInfoForm
 
 from django.contrib.auth import authenticate,login,logout
 from django.http import HttpResponse,HttpResponseRedirect
-from django.core.urlresolvers import reverse
+#from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -18,7 +19,7 @@ def user_login(request):
 
         user = authenticate(username=username, password=password)
         if user:
-            if user.is_valid:
+            if user.is_active:
                 login(request,user)
                 return HttpResponseRedirect(reverse('index'))
             else:
